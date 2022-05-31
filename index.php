@@ -1,9 +1,25 @@
 <?php
 
-use App\Test;
+use App\Router;
+use App\ControllerFactory;
+use App\Http\Controllers\ControllerInterface;
 
 include_once 'vendor/autoload.php';
 
-$test = new Test();
+$route = (new Router())->parseRoute($_SERVER['REQUEST_URI']);
 
-echo $test->getOn();
+// /** @var ControllerInterface $controller */
+$controller = (new ControllerFactory())->make($route);
+
+if (empty($route[1])) {
+    $controller->index();
+
+    return;
+}
+
+$controller->show($route[1]);
+// echo "<pre>";
+// var_dump($route);
+// var_dump($controller);
+// var_dump($controller);
+// var_dump($param);
