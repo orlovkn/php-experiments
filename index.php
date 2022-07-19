@@ -1,9 +1,11 @@
 <?php
 
-use App\Test;
+use App\PaymentProcess;
+use App\PaypalPaymentMethod;
+use App\VisaPaymentMethod;
 
 include_once 'vendor/autoload.php';
 
-$test = new Test();
+$method = new PaypalPaymentMethod();
 
-echo $test->getOn();
+$paymentProcess = new PaymentProcess(method);
